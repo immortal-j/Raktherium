@@ -94,33 +94,33 @@
 
         <div class="section-title">
           <h2>Use Your Incentives</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
+            Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+        
+
+        <table style="border: 1px solid black;" id="example" class="display">
+          <thead>
+              <tr style="text-align: center; border: 1px solid black; ">
+                  <th>Sr no.</th>
+                  <th>Blood Bank</th>
+                  <th style="padding: 30px" >Category</th>
+                  <th>Availability</th>
+                  <th>Last Updates</th>
+                  <th>Type</th>
+              </tr>
+          </thead>
+        </table>
+
+
+
+        <!-- <div class="row">
+
+        <div id="five" class=" col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+          <div  class="icon-box">
+            </div>
         </div>
 
-        <div class="row">
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Thyroid Test</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Complete blood count test</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Sugar Test</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
 
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
             <div class="icon-box">
@@ -132,23 +132,10 @@
 
         </div>
 
-      </div>
+      </div> -->
     </section><!-- End Services Section -->
     <footer id="footer">
 
-      <!-- <div class="footer-newsletter">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-6">
-              <h4>Join Our Newsletter</h4>
-              <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-              <form action="" method="post">
-                <input type="email" name="email"><input type="submit" value="Subscribe">
-              </form>
-            </div>
-          </div>
-        </div>
-      </div> -->
   
       <div class="footer-top">
         <div class="container">
@@ -228,6 +215,58 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+    function displayCards(data){
+      const wegot = JSON.parse(data.contents);
+      console.log(wegot.data);
+      var cnt = 0;
+      while(cnt<17){
+        const tableRow = document.createElement("tr");
+        const att = document.createAttribute("style");
+        att.value = "border: 1px solid black";
+        tableRow.setAttributeNode(att);
+
+        
+        var sno = document.createElement("td");
+        sno.innerHTML = wegot.data[cnt][0];
+        tableRow.appendChild(sno);
+        
+        var bb = document.createElement("td");
+        bb.innerHTML = wegot.data[cnt][1];
+        tableRow.appendChild(bb);
+        
+        var cat = document.createElement("td");
+        cat.innerHTML = wegot.data[cnt][2];
+        tableRow.appendChild(cat);
+        
+        var avail = document.createElement("td");
+        avail.innerHTML = wegot.data[cnt][3];
+        tableRow.appendChild(avail);
+        
+        var lu = document.createElement("td");
+        lu.innerHTML = wegot.data[cnt][4];
+        tableRow.appendChild(lu);
+
+        var tp = document.createElement("td");
+        tp.innerHTML = wegot.data[cnt][5];
+        tableRow.appendChild(tp);
+        
+        const choose = document.getElementById("example");
+        choose.appendChild(tableRow);
+        cnt++;
+      }
+    }
+
+  fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://www.eraktkosh.in/BLDAHIMS/bloodbank/nearbyBB.cnt?hmode=GETNEARBYSTOCKDETAILS&stateCode=27&districtCode=505&bloodGroup=all&bloodComponent=11&lang=0')}`)
+  .then(response => {
+	  if (response.ok) return response.json()
+	  throw new Error('Network response was not ok.')
+  })
+  .then(data => {displayCards(data)});
+    
+
+
+  </script>
 
 </body>
 
